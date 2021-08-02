@@ -7,14 +7,9 @@ import useAuth from "./AuthContext";
 const ProtectRoutes = (props: any) => {
   const router = useRouter();
   const { children } = props;
-  const { startChecking, authenticated, loading } = useAuth();
+  const { startChecking, loading } = useAuth();
   useEffect(() => {
     startChecking();
-    if (!authenticated) {
-      router.push("/auth_screen");
-    } else {
-      router.push("/");
-    }
   }, []);
   return loading && router.pathname !== "/auth_screen" ? (
     <></>

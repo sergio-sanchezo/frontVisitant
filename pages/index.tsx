@@ -1,4 +1,12 @@
-import { Button, Image, Modal, Form, Cascader, DatePicker } from "antd";
+import {
+  Button,
+  Image,
+  Modal,
+  Form,
+  Cascader,
+  DatePicker,
+  message,
+} from "antd";
 import moment from "moment";
 import Head from "next/head";
 import { useEffect, useState } from "react";
@@ -20,7 +28,13 @@ export default function Home() {
     data.user = session.data.usr_document;
     const resp = await fetchConToken("visit", data, "POST");
     const body = await resp.json();
-    console.log(body);
+    if (body.ok) {
+      message.success("Visita planeada con éxito");
+      modalState(false);
+    } else {
+      message.error("Ha ocurrido un érror");
+      modalState(false);
+    }
   };
   // console.log(session);
   const getData = async () => {

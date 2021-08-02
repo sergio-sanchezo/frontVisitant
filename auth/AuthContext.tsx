@@ -55,14 +55,12 @@ export const AuthContextProvider = (props: any) => {
       setAuthenticated(true);
       setLoading(false);
       router.push("/");
-    } else {
-      message.error("Ya existe un usuario con esta contraseña");
     }
   };
 
   const logout = async () => {
     localStorage.clear();
-    router.push("/login");
+    router.push("/auth_screen");
   };
   return (
     <AuthContext.Provider
