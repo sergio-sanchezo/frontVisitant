@@ -22,10 +22,10 @@ export default function Home() {
   const modalState = (state: boolean) => {
     setShowModal(state);
   };
+  console.log(session);
   const onFinish = async (data: any) => {
-    // console.log(data);
     data.arriveDate = data.arriveDate.format("YYYY-MM-DD");
-    data.user = session.data.usr_document;
+    data.user = session.data.usr_document || session.data.document;
     const resp = await fetchConToken("visit", data, "POST");
     const body = await resp.json();
     if (body.ok) {
@@ -36,7 +36,6 @@ export default function Home() {
       modalState(false);
     }
   };
-  // console.log(session);
   const getData = async () => {
     const resp = await fetchConToken("referencePointSection");
     const body = await resp.json();
